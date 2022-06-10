@@ -18,6 +18,20 @@ router.route('/')
         const [datas] = await db.query(sql);
        res.json(datas);
     })
+
+    .put(upload.none(), async (req,res,next)=>{
+        let output = {
+            ok:false
+        }
+        const id = req.params.id;
+        const sql = "UPDATE recipeslist SET Recipes_Clicks=? WHERE Recipes_ID=?";
+        const [datas] = await db.query(sql,[req.body.Recipes_Clicks,id]);
+        if(datas.affectedRows === 1){
+            output.ok = true;
+         }
+       res.json(output) ;        
+    })
+
     .post(upload.none(),async (req,res,next)=>{
         const sql = "INSERT INTO recipeslist(Recipes_ID,Recipes_Name,Recipes_Clicks,RecipesPicture) VALUES (?,?,?)";
        // const [datas] = await db.query(sql,[req.body]);
@@ -50,7 +64,7 @@ router.route('/:id')
             ok:false
         }
         const id = req.params.id;
-        const sql = "UPDATE recipeslist SET RecipesName=?, Recipes_Clicks=? WHERE Recipes_ID=?";
+        const sql = "UPDATE recipeslist SET Recipes_Clicks=? WHERE Recipes_ID=?";
         const [datas] = await db.query(sql,[req.body.RecipesName,req.body.Recipes_Clicks,id]);
         if(datas.affectedRows === 1){
             output.ok = true;
