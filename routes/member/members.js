@@ -22,10 +22,10 @@ members.get('/email',(req,res,next)=>{
         res.json(results);
     })
 })
-// http://localhost:3001/members/12 找出某位會員(by mid) -->使用'動態路由'找出某會員(by mid)--> 放在所有路由的最後面，以免上列的某些路由失效
+// http://localhost:3001/members/1 找出某位會員(by mid) -->使用'動態路由'找出某會員(by mid)--> 放在所有路由的最後面，以免上列的某些路由失效
 members.get('/:mid',(req,res,next)=>{
     const mid = req.params.mid;
-    const sql = "SELECT * FROM member where mid = ?";   
+    const sql = "SELECT mname, msex, mvocation, mbirthday, mcity, maddress, mchild, mphone, mpassword FROM member where mid = ?";   
     connection.query(sql,[mid],function(err,results,fields){
         console.log(err);
         res.json(results);
@@ -57,6 +57,18 @@ members.post('/',upload.none(), (req,res,next)=>{
             res.send(false);
         }
     })
+})
+// 用PUT方式向 http://localhost:3001/members/7 更改某會員資料(由表單PUT而來的mid來做變更)
+members.put('/:mid',upload.none(), async (req,res,next)=>{
+    let output = { ok:false };
+    const mid = req.params.mid;
+    const member = req.body;
+    const sql = "UPDATE member SET mname=?, msex=?, mvocation=?, mbirthday=?, mcity=?, maddress=?, mchild=?, mphone=?, mpassword=? WHERE mid=?";
+    const [datas] = await connection.query(sql,[member.mname,member.msex,member.mvocation, member.mbirthday, member.mcity, member.maddress, member.mchild, member.mphone, member.mpassword, mid]);
+    if(datas.affectedRows === 1){
+            output.ok = true;
+    }
+    res.json(output) ;
 })
 
 module.exports = members;
