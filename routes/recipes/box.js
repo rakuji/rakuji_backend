@@ -19,11 +19,13 @@ router.route('/')
        res.json(datas);
     })
 
+    router.route('/:id')
     .put(upload.none(), async (req,res,next)=>{
         let output = {
             ok:false
         }
         const id = req.params.id;
+        console.log(id,req.body.Recipes_Clicks)
         const sql = "UPDATE recipeslist SET Recipes_Clicks=? WHERE Recipes_ID=?";
         const [datas] = await db.query(sql,[req.body.Recipes_Clicks,id]);
         if(datas.affectedRows === 1){
