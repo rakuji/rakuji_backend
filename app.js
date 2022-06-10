@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+require('dotenv').config();
 const cors = require('cors')
 
 var indexRouter = require('./routes/index');
@@ -12,6 +13,7 @@ var usersRouter = require('./routes/users');
 let shopMapRouter = require('./routes/about/shopMap.js');
 let shopListsRouter = require('./routes/store/shopLists.js');
 let membersRouter = require('./routes/member/members.js');
+const signupRouter = require('./routes/contact/signup.js')
 // ********************************************************
 
 var app = express();
@@ -37,6 +39,7 @@ app.use('/shopMap',shopMapRouter);
 app.use('/shopLists',shopListsRouter);
 //存取members的URL: http://localhost:3001/members
 app.use('/members',membersRouter);
+app.use('/signup',signupRouter);
 // ***************************************************************
 
 
