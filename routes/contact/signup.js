@@ -20,6 +20,7 @@ router.post("/", async function (req, res, next) {
   // });
   // const promisePool = db.promise();
   // query database using promises
+  
   const [members,fields] = await promisePool.query(sql,req.body.Memail);
   console.log(members);
   // const total = datas[0].TOTAL;
