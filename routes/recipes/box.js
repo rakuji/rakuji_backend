@@ -19,6 +19,7 @@ router.route('/')
        res.json(datas);
     })
 
+    ///////////////////////修改瀏覽次數///////////////////////////
     router.route('/:id')
     .put(upload.none(), async (req,res,next)=>{
         let output = {
@@ -33,6 +34,7 @@ router.route('/')
          }
        res.json(output) ;        
     })
+    ///////////////////////修改瀏覽次數///////////////////////////
 
     .post(upload.none(),async (req,res,next)=>{
         const sql = "INSERT INTO recipeslist(Recipes_ID,Recipes_Name,Recipes_Clicks,RecipesPicture) VALUES (?,?,?)";
