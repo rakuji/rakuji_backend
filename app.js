@@ -22,6 +22,10 @@ const recipesboxRouterCookingsteps = require('./routes/recipes/box_Cookingsteps'
 const recipesboxRouterBox_Nutrient = require('./routes/recipes/box_Nutrient');
 // ********************************************************
 
+// ****** 定義 創意食譜列表/詳細食譜 頁面的路由 **********
+const latestNews = require('./routes/new/latestNews')
+// ********************************************************
+
 var app = express();
 
 // view engine setup
@@ -60,6 +64,11 @@ app.use('/shopMap',shopMapRouter);
 app.use('/shopLists',shopListsRouter);
 //存取members的URL: http://localhost:3001/members
 app.use('/members',membersRouter);
+// ***************************************************************
+
+// ******* 掛載 最新消息列表 頁面的路由到指定路徑 *******
+//http://localhost:3001/latest_news
+app.use('/latest_news',latestNews);
 // ***************************************************************
 
 
