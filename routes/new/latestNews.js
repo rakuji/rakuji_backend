@@ -24,9 +24,9 @@ router.route('/:id')
     .get(async (req,res,next)=>{
         const id = req.params.id;
         const sql = "SELECT * FROM latest_news WHERE sid=?" ;
-        const [datas] = await db.query(sql,[id]);
+        const [datas] = await db.query(sql, [id]);
        res.json(datas);
-      //  res.send(`讀取${id}的資料`)
+    //    res.send(`讀取${id}的資料`)
     })
     // .put(upload.none(), async (req,res,next)=>{
     //     let output = {
