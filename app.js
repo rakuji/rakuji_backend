@@ -14,6 +14,10 @@ let shopListsRouter = require('./routes/store/shopLists.js');
 let membersRouter = require('./routes/member/members.js');
 // ********************************************************
 
+const productsRouter = require('./routes/products/products');
+const cartRouter = require('./routes/cart/cart');
+const bookingRouter = require('./routes/booking/booking')
+
 var app = express();
 
 // view engine setup
@@ -38,6 +42,13 @@ app.use('/shopLists',shopListsRouter);
 //存取members的URL: http://localhost:3001/members
 app.use('/members',membersRouter);
 // ***************************************************************
+
+//http://localhost:3001/products
+app.use('/products',productsRouter);
+//http://localhost:3001/cart
+app.use('/cart',cartRouter);
+//http://localhost:3001/booking
+app.use('/booking',bookingRouter)
 
 
 // catch 404 and forward to error handler
