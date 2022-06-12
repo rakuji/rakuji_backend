@@ -83,10 +83,10 @@ router.route('/:id')
         }
         const id = req.params.id;
         // const member = req.body;
-        // const sql = "UPDATE member SET mname=?, msex=?, mvocation=?, mbirthday=?, mcity=?, maddress=?, mchild=?, mphone=?, mpassword=? WHERE mid=?";
-        // const [datas] = await db.query(sql,[member.mname,member.msex,member.mvocation, member.mbirthday, member.mcity, member.maddress, member.mchild, member.mphone, member.mpassword, mid]);
-        const sql = "UPDATE member SET Mcity=?, Mphone=? WHERE MID=?";
-        const [datas] = await db.query(sql,[req.body.mcity, req.body.mphone, id]);
+        const sql = "UPDATE member SET mname=?, msex=?, mvocation=?, mbirthday=?, mcity=?, maddress=?, mchild=?, mphone=?, mpassword=? WHERE mid=?";
+        const [datas] = await db.query(sql,[member.mname,member.msex,member.mvocation, member.mbirthday, member.mcity, member.maddress, member.mchild, member.mphone, member.mpassword, mid]);
+        // const sql = "UPDATE member SET Mcity=?, Mphone=? WHERE MID=?";
+        // const [datas] = await db.query(sql,[req.body.mcity, req.body.mphone, id]);
         if(datas.affectedRows === 1){
                 output.ok = true;
         }
