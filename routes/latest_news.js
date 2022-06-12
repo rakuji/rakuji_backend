@@ -3,6 +3,21 @@ const router = express.Router();
 const multer = require('multer');
 const db = require('../modules/mysql_config');
 const upload = multer();
+
+const ext = {
+    'image/jpeg':'.jpg',
+    'image/png':'.png',
+    'image/gif':'.gif',
+  }
+  const storage = multer.diskStorage({
+    destination:(req,file,cb)=>{
+      cb(null, 'public/uploads');
+    },
+    filename:(req,file,cb)=>{
+       cb(null, new Date().getTime() + ext[file.mimetype]);
+    }
+  })
+
 //GET　http://localhost:3001/latest_news
 router.route('/')
     .get(async (req,res,next)=>{
@@ -11,13 +26,13 @@ router.route('/')
         const [datas] = await db.query(sql);
        res.json(datas);
     })
-    // .post(upload.none(),async (req,res,next)=>{
-    //     const sql = "INSERT INTO categories(CategoryID,CategoryName,Description) VALUES (?,?,?)";
-    //    // const [datas] = await db.query(sql,[req.body]);
-    //     const [datas] = await db.query(sql,[req.body.CategoryID,req.body.CategoryName,req.body.Description]);
-    //     console.log(datas)
-    //     res.send("新增資料")
-    // })
+    .post(upload.none(),async (req,res,next)=>{
+        const sql = "INSERT INTO latest_news(sid,name,imgid ,timestart,timeend,content) VALUES (?,?,?,?,?,?)";
+       // const [datas] = await db.query(sql,[req.body]);
+        const [datas] = await db.query(sql,[req.body.sid,req.body.name,req.body.imgid,req.body.timestart,req.body.timeend,req.body.content]);
+        console.log(datas)
+        res.send("新增資料")
+    })
    
 
 router.route('/:id')
