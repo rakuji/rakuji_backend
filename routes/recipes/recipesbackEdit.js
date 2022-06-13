@@ -20,28 +20,20 @@ router.route("/:id").get(async (req, res, next) => {
 });
 
 ///////////////////////修改瀏覽次數///////////////////////////
-router.route("/:id").put(upload.none(), async (req, res, next) => {
-  let output = {
-    ok: false,
-  };
-  const id = req.params.id;
-
-  const sql = "UPDATE recipeslist SET recipeslist WHERE Recipes_ID=?";
-  const [datas] = await db.query(sql, [
-    req.body.Recipes_Name,
-    req.body.Recipes_Clicks,
-    req.body.Recipes_Picture,
-    req.body.RecipesBox_Kcal,
-    req.body.RecipesBox_Time,
-    req.body.RecipesBox_SeveralCopies,
-    id,
-  ]);
-  console.log(datas);
-  if (datas.affectedRows === 1) {
-    output.ok = true;
-  }
-  res.json(output);
-});
+router.route('/:id')
+.put(upload.none(), async (req,res,next)=>{
+    let output = {
+        ok:false
+    }
+    const id = req.params.id;
+    console.log(id,req.body.RecipesBox_Kcal)
+    const sql = "UPDATE recipeslist SET RecipesBox_Kcal=? WHERE Recipes_ID=?";
+    const [datas] = await db.query(sql,[req.body.RecipesBox_Kcal,id]);
+    if(datas.affectedRows === 1){
+        output.ok = true;
+     }
+   res.json(output) ;        
+})
 ///////////////////////修改瀏覽次數///////////////////////////
 
 module.exports = router;

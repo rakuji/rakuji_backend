@@ -21,6 +21,7 @@ const recipesboxRouterSeasoning = require('./routes/recipes/box_Seasoning');
 const recipesboxRouterCookingsteps = require('./routes/recipes/box_Cookingsteps');
 const recipesboxRouterBox_Nutrient = require('./routes/recipes/box_Nutrient');
 const recipesbackEdit = require('./routes/recipes/recipesbackEdit');
+const recipesbackAdd = require('./routes/recipes/recipesbackAdd');
 // ********************************************************
 
 // ****** 定義 創意食譜列表/詳細食譜 頁面的路由 **********
@@ -58,6 +59,8 @@ app.use('/recipes/box_Cookingsteps',recipesboxRouterCookingsteps);
 app.use('/recipes/box_Nutrient',recipesboxRouterBox_Nutrient);
 //存取members的URL: http://localhost:3001/recipes/recipesbackEdit
 app.use('/recipes/recipesbackEdit',recipesbackEdit);
+//存取members的URL: http://localhost:3001/recipes/recipesbackAdd
+app.use('/recipes/recipesbackAdd',recipesbackAdd);
 // ***************************************************************
 
 // ******* 掛載 關於我們/門市資訊/會員登入 頁面的路由到指定路徑 *******
