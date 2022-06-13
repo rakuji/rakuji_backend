@@ -37,28 +37,7 @@ router
     //  res.send(`讀取${id}的資料`)
   })
 
-  
-  .put(upload.none(), async (req, res, next) => {
-    let output = {
-      ok: false,
-    };
-    const id = req.params.id;
-    const sql =
-      "UPDATE recipeslist SET RecipesName=?, Recipes_Clicks=? WHERE Recipes_ID=?";
-    const [datas] = await db.query(sql, [
-      req.body.RecipesName,
-      req.body.Recipes_Clicks,
-      id,
-    ]);
-    if (datas.affectedRows === 1) {
-      output.ok = true;
-    }
-    res.json(output);
-  })
-
-
-
-  .delete(async (req, res, next) => {
+    .delete(async (req, res, next) => {
     let output = {
       ok: false,
     };

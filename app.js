@@ -20,6 +20,7 @@ const recipesboxRouterIngredients = require('./routes/recipes/box_Ingredients');
 const recipesboxRouterSeasoning = require('./routes/recipes/box_Seasoning');
 const recipesboxRouterCookingsteps = require('./routes/recipes/box_Cookingsteps');
 const recipesboxRouterBox_Nutrient = require('./routes/recipes/box_Nutrient');
+const recipesbackEdit = require('./routes/recipes/recipesbackEdit');
 // ********************************************************
 
 // ****** 定義 創意食譜列表/詳細食譜 頁面的路由 **********
@@ -47,14 +48,16 @@ app.use('/users', usersRouter);
 app.use('/recipes',recipesRouter);
 //存取shopLists的URL: http://localhost:3001/box
 app.use('/recipes/box',recipesboxRouter);
-//存取members的URL: http://localhost:3001/box
+//存取members的URL: http://localhost:3001/recipes/box_Ingredients
 app.use('/recipes/box_Ingredients',recipesboxRouterIngredients);
 //存取members的URL: http://localhost:3001/box
 app.use('/recipes/box_Seasoning',recipesboxRouterSeasoning);
-//存取members的URL: http://localhost:3001/box
+//存取members的URL: http://localhost:3001/recipes/box_Cookingsteps
 app.use('/recipes/box_Cookingsteps',recipesboxRouterCookingsteps);
-//存取members的URL: http://localhost:3001/box
+//存取members的URL: http://localhost:3001/recipes/box_Nutrient
 app.use('/recipes/box_Nutrient',recipesboxRouterBox_Nutrient);
+//存取members的URL: http://localhost:3001/recipes/recipesbackEdit
+app.use('/recipes/recipesbackEdit',recipesbackEdit);
 // ***************************************************************
 
 // ******* 掛載 關於我們/門市資訊/會員登入 頁面的路由到指定路徑 *******
