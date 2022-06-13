@@ -11,7 +11,7 @@ router
   .route("/")
   .post(async (req, res, next) => {
     const {
-      loginMemberId,
+      mid,
       startDateformat,
       storeInput,
       peopleAdultInput,
@@ -40,7 +40,7 @@ router
     const sql =
       "INSERT INTO `booking`(member_id,booking_date,store,people_adult,people_kid,meal_time,booking_time,name,phone,email,statue,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,Now())"; //order需要加反引號，否則會報錯，因為order為sql保留字
     const datas = await db.query(sql, [
-      loginMemberId,
+      mid,
       startDateformat,
       storeInput,
       peopleAdultInput,
