@@ -13,53 +13,59 @@ router.route('/')
         res.json(datas);
     })
     // 用POST方式向 http://localhost:3001/members 要求某會員帳密(由表單POST而來的email來查詢password)
+    // .post(upload.none(), async(req,res,next)=>{
+    //     const member = req.body;
+    //     const sql = "SELECT memail, mpassword FROM member WHERE memail = ?";   
+    //     const [datas] = await db.query(sql,[req.body.email]);
+    //     if (datas.length == 1) {
+    //         // res.send(true);
+    //         datas.map((v,i)=>{
+    //             const {memail,mpassword} = v;
+    //             // res.send(`${memail}---${mpassword}`);
+    //             if(req.body.email == memail && req.body.password == mpassword){
+    //                 res.send(true);
+    //             }else{
+    //                 // res.send('wrong pwd');
+    //                 res.send(false);
+    //             }
+    //         })
+    //     }else{
+    //         // res.send('wrong email');
+    //         res.send(false);
+    //     }
+    // })
     .post(upload.none(), async(req,res,next)=>{
         const member = req.body;
-        const sql = "SELECT memail, mpassword FROM member WHERE memail = ?";   
+        const sql = "SELECT mid, memail, mpassword FROM member WHERE memail = ?";   
         const [datas] = await db.query(sql,[req.body.email]);
+        let output = { 
+            ok:false,
+            mid:"",
+            memail:""
+        }
         if (datas.length == 1) {
             // res.send(true);
             datas.map((v,i)=>{
-                const {memail,mpassword} = v;
+                const {mid, memail, mpassword} = v;
                 // res.send(`${memail}---${mpassword}`);
                 if(req.body.email == memail && req.body.password == mpassword){
-                    res.send(true);
-                }else{
-                    // res.send('wrong pwd');
-                    res.send(false);
-                }
+                    output.ok = true;
+                    output.mid = mid;
+                    output.memail = memail;
+                }   
             })
-        }else{
-            // res.send('wrong email');
-            res.send(false);
         }
+        res.json(output);
     })
-    // .post(upload.none(), (req,res,next)=>{
-    //     // const member = req.body;
-    //     // res.send(`POST:${member.email} --- ${member.password}`);
-    //     const sql = "SELECT memail, mpassword FROM member WHERE memail = ?";   
-    //     db.query(sql,[req.body.email],function(err,results,fields){
-    //         console.log(err);
-    //         // res.send(results[0].memail+'-'+results[0].mpassword);
-    //         if(results.length == 1){
-    //             results.map((v,i)=>{
-    //                 const {memail,mpassword} = v;
-    //                 // res.send(`${memail}---${mpassword}`);
-    //                 if(req.body.email == memail && req.body.password == mpassword){
-    //                     // req.session.authenticated = true;
-    //                     // req.session.memail = memail;
-    //                     // res.send(`歡迎帳號:${req.session.memail} 登入`);
-    //                     res.send(true);
-    //                 }else{
-    //                     res.send(false);
-    //                 }
-    //             })
-    //         }else{
-    //             res.send(false);
-    //         }
-    //     })
-    // })
     
+    // http://localhost:3001/members?memail=fan@gmail.com 找出某位會員(by email) ---> 無法存取!?
+    // .get(async(req,res,next)=>{
+    //     // const mid = req.params.mid;
+    //     const sql = "SELECT * FROM member WHERE memail = ?";   
+    //     const [datas] = await db.query(sql,[req.query.memail]);
+    //     res.json(datas);
+    // })
+
 router.route('/email')
     // http://localhost:3001/members/email?memail=fan@gmail.com 找出某位會員(by email)
     .get(async(req,res,next)=>{
@@ -68,6 +74,20 @@ router.route('/email')
         const [datas] = await db.query(sql,[req.query.memail]);
         res.json(datas);
     })
+    .put(upload.none(), async (req,res,next)=>{
+        console.log(req.body)
+
+        let output = { 
+            ok:false 
+        }
+        // const member = req.body;
+        const sql = "UPDATE member SET mname=?, msex=?, mvocation=?, mbirthday=?, mcity=?, maddress=?, mchild=?, mphone=?, mpassword=? WHERE memail=?";
+        const [datas] = await db.query(sql,[req.body.name,req.body.sex,req.body.vocation, req.body.birthday, req.body.city, req.body.address, req.body.child, req.body.phone, req.body.password, req.query.memail]);
+        if(datas.affectedRows === 1){
+                output.ok = true;
+        }
+        res.json(output) ;
+    }   )
 
 router.route('/:id')
     .get(async(req,res,next)=>{
@@ -82,9 +102,9 @@ router.route('/:id')
             ok:false 
         }
         const id = req.params.id;
-        // const member = req.body;
+        const member = req.body;
         const sql = "UPDATE member SET mname=?, msex=?, mvocation=?, mbirthday=?, mcity=?, maddress=?, mchild=?, mphone=?, mpassword=? WHERE mid=?";
-        const [datas] = await db.query(sql,[member.mname,member.msex,member.mvocation, member.mbirthday, member.mcity, member.maddress, member.mchild, member.mphone, member.mpassword, mid]);
+        const [datas] = await db.query(sql,[member.mname,member.msex,member.mvocation, member.mbirthday, member.mcity, member.maddress, member.mchild, member.mphone, member.mpassword, id]);
         // const sql = "UPDATE member SET Mcity=?, Mphone=? WHERE MID=?";
         // const [datas] = await db.query(sql,[req.body.mcity, req.body.mphone, id]);
         if(datas.affectedRows === 1){
