@@ -32,7 +32,7 @@ router.route("/productcomment").post(async (req, res, next) => {
 
 router.route("/productcommentsearch").get(async (req, res, next) => {
   const sql =
-    "SELECT `products_comment`.`id`,`product_id`,`rating`,`member_id`,`contents`,`products_comment`.`created_at`,`name` FROM `products_comment` JOIN `member` ON `member`.`id` = `products_comment`.`member_id` ORDER BY `id` DESC";
+    "SELECT `products_comment`.`id`,`product_id`,`rating`,`member_id`,`contents`,`products_comment`.`created_at`,`Mname` FROM `products_comment` JOIN `member` ON `member`.`MID` = `products_comment`.`member_id` ORDER BY `id` DESC";
   const [datas] = await db.query(sql);
   res.json(datas);
 });
