@@ -16,6 +16,10 @@ const signupRouter = require('./routes/contact/signup.js');
 const contactRouter = require('./routes/contact/contact.js');
 // ********************************************************
 
+const productsRouter = require('./routes/products/products');
+const cartRouter = require('./routes/cart/cart');
+const bookingRouter = require('./routes/booking/booking')
+
 var app = express();
 
 // view engine setup
@@ -42,6 +46,13 @@ app.use('/members',membersRouter);
 app.use('/signup',signupRouter);//註冊
 app.use('/contact',contactRouter);//聯絡我們
 // ***************************************************************
+
+//http://localhost:3001/products
+app.use('/products',productsRouter);
+//http://localhost:3001/cart
+app.use('/cart',cartRouter);
+//http://localhost:3001/booking
+app.use('/booking',bookingRouter)
 
 
 // catch 404 and forward to error handler
