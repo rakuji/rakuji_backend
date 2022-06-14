@@ -3,10 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+require('dotenv').config();
 const cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const categoriesRouter = require('./routes/categories');
+const productsRouter = require('./routes/products');
+const latestNews = require('./routes/latest_news')
 
 // ****** 定義 關於我們/門市資訊/會員登入 頁面的路由 **********
 let shopMapRouter = require('./routes/about/shopMap.js');
@@ -53,6 +57,10 @@ app.use('/products',productsRouter);
 app.use('/cart',cartRouter);
 //http://localhost:3001/booking
 app.use('/booking',bookingRouter)
+//http://localhost:3001/categories
+app.use('/categories',categoriesRouter);
+//http://localhost:3001/latest_news
+app.use('/latest_news',latestNews);
 
 
 // catch 404 and forward to error handler
