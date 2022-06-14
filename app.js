@@ -9,7 +9,7 @@ const cors = require('cors')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const categoriesRouter = require('./routes/categories');
-const latestNews = require('./routes/latest_news')
+
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -77,8 +77,7 @@ app.use('/cart',cartRouter);
 app.use('/booking',bookingRouter)
 //http://localhost:3001/categories
 app.use('/categories',categoriesRouter);
-//http://localhost:3001/latest_news
-app.use('/latest_news',latestNews);
+
 
 
 
