@@ -12,6 +12,8 @@ var usersRouter = require('./routes/users');
 let shopMapRouter = require('./routes/about/shopMap.js');
 let shopListsRouter = require('./routes/store/shopLists.js');
 let membersRouter = require('./routes/member/members.js');
+const signupRouter = require('./routes/contact/signup.js');
+const contactRouter = require('./routes/contact/contact.js');
 // ********************************************************
 
 var app = express();
@@ -37,6 +39,8 @@ app.use('/shopMap',shopMapRouter);
 app.use('/shopLists',shopListsRouter);
 //存取members的URL: http://localhost:3001/members
 app.use('/members',membersRouter);
+app.use('/signup',signupRouter);//註冊
+app.use('/contact',contactRouter);//聯絡我們
 // ***************************************************************
 
 
