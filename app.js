@@ -9,7 +9,6 @@ const cors = require('cors')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const categoriesRouter = require('./routes/categories');
-const productsRouter = require('./routes/products');
 const latestNews = require('./routes/latest_news')
 
 // ****** 定義 關於我們/門市資訊/會員登入 頁面的路由 **********
