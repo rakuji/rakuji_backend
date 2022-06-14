@@ -21,7 +21,7 @@ router.post("/", async function (req, res, next) {
   // const promisePool = db.promise();
   // query database using promises
   const mysql = require('mysql2');
-  const pool = mysql.createPool({host:'localhost', user: 'root',password:'Password', database: 'rakuji_hr'});
+  const pool = mysql.createPool({host:'localhost', user: 'rakuji',password:'rakuji', database: 'rakuji'});
   const promisePool = pool.promise();
   const [members,fields] = await promisePool.query(sql,req.body.Memail);
   console.log(members);
