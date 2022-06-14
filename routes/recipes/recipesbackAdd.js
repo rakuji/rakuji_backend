@@ -15,10 +15,14 @@ router.route("/").get(async (req, res, next) => {
 router.route("/new").post(upload.none(), async (req, res, next) => {
   const id = req.params.id;
   const sql =
-    "INSERT INTO recipeslist(Recipes_ID) VALUES (?)";
+    "INSERT INTO `recipeslist`(`Recipes_Name`, `RecipesBox_Kcal`, `RecipesBox_Time`, `RecipesBox_SeveralCopies`, `RecipesClass`) VALUES (?, ?, ?, ?, ?)";
   // const [datas] = await db.query(sql,[req.body]);
   const [datas] = await db.query(sql, [
-    req.body.Recipes_ID
+    req.body.Recipes_Name,
+    req.body.RecipesBox_Kcal,
+    req.body.RecipesBox_Time,
+    req.body.RecipesBox_SeveralCopies,
+    req.body.RecipesClass,
   ]);
   console.log(datas);
   res.send("新增資料");

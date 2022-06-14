@@ -26,9 +26,9 @@ router.route('/:id')
         ok:false
     }
     const id = req.params.id;
-    console.log(id,req.body.RecipesBox_Kcal)
-    const sql = "UPDATE recipeslist SET RecipesBox_Kcal=? WHERE Recipes_ID=?";
-    const [datas] = await db.query(sql,[req.body.RecipesBox_Kcal,id]);
+    console.log(id,req.body.RecipesBox_Time)
+    const sql = "UPDATE recipeslist SET RecipesBox_Time=? WHERE Recipes_ID=?";
+    const [datas] = await db.query(sql,[req.body.RecipesBox_Time,id]);
     if(datas.affectedRows === 1){
         output.ok = true;
      }
