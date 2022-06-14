@@ -7,7 +7,6 @@ const cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
 // ****** 定義 關於我們/門市資訊/會員登入 頁面的路由 **********
 let shopMapRouter = require('./routes/about/shopMap.js');
 let shopListsRouter = require('./routes/store/shopLists.js');
