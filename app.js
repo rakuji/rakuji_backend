@@ -8,7 +8,7 @@ const cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const categoriesRouter = require('./routes/categories');
+// const categoriesRouter = require('./routes/categories');
 
 
 var indexRouter = require("./routes/index");
@@ -33,7 +33,7 @@ const recipesbackAdd = require("./routes/recipes/recipesbackAdd");
 // ********************************************************
 
 // ****** 定義 最新消息列表  頁面的路由 **********
-const latestNews = require("./routes/new/latestNews");
+const latestNews = require("./routes/latest_news");
 
 // ********************************************************
 
@@ -76,7 +76,7 @@ app.use('/cart',cartRouter);
 //http://localhost:3001/booking
 app.use('/booking',bookingRouter)
 //http://localhost:3001/categories
-app.use('/categories',categoriesRouter);
+// app.use('/categories',categoriesRouter);
 
 
 
