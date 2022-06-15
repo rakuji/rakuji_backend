@@ -24,6 +24,7 @@ const contactRouter = require('./routes/contact/contact.js');
 // ****** 定義 創意食譜列表/詳細食譜 頁面的路由 **********
 const recipesRouter = require("./routes/recipes/recipes");
 const recipesboxRouter = require("./routes/recipes/box");
+const recipesboxRouterProducts = require("./routes/recipes/box_Products");
 const recipesboxRouterIngredients = require("./routes/recipes/box_Ingredients");
 const recipesboxRouterSeasoning = require("./routes/recipes/box_Seasoning");
 const recipesboxRouterCookingsteps = require("./routes/recipes/box_Cookingsteps");
@@ -88,6 +89,8 @@ app.use('/booking',bookingRouter)
 app.use("/recipes", recipesRouter);
 //存取shopLists的URL: http://localhost:3001/box
 app.use("/recipes/box", recipesboxRouter);
+//存取shopLists的URL: http://localhost:3001/recipes/box_Products
+app.use("/recipes/box_Products", recipesboxRouterProducts);
 //存取members的URL: http://localhost:3001/recipes/box_Ingredients
 app.use("/recipes/box_Ingredients", recipesboxRouterIngredients);
 //存取members的URL: http://localhost:3001/box
